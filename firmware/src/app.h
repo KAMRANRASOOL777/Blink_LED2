@@ -114,6 +114,9 @@ typedef struct
     APP_STATES state;
 
     /* TODO: Define any additional data used by the application. */
+    bool ledvalue;
+    SYS_TMR_HANDLE sysTmrHandle1;
+    bool delay1Expired;
 
     /* Device layer handle returned by device layer open function */
     USB_DEVICE_HANDLE deviceHandle;

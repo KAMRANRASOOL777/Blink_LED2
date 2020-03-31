@@ -22,32 +22,6 @@
     files.
  *******************************************************************************/
 
-// DOM-IGNORE-BEGIN
-/*******************************************************************************
-Copyright (c) 2013-2014 released Microchip Technology Inc.  All rights reserved.
-
-Microchip licenses to you the right to use, modify, copy and distribute
-Software only when embedded on a Microchip microcontroller or digital signal
-controller that is integrated into your product or third party product
-(pursuant to the sublicense terms in the accompanying license agreement).
-
-You should refer to the license agreement accompanying this Software for
-additional information regarding your rights and obligations.
-
-SOFTWARE AND DOCUMENTATION ARE PROVIDED "AS IS" WITHOUT WARRANTY OF ANY KIND,
-EITHER EXPRESS OR IMPLIED, INCLUDING WITHOUT LIMITATION, ANY WARRANTY OF
-MERCHANTABILITY, TITLE, NON-INFRINGEMENT AND FITNESS FOR A PARTICULAR PURPOSE.
-IN NO EVENT SHALL MICROCHIP OR ITS LICENSORS BE LIABLE OR OBLIGATED UNDER
-CONTRACT, NEGLIGENCE, STRICT LIABILITY, CONTRIBUTION, BREACH OF WARRANTY, OR
-OTHER LEGAL EQUITABLE THEORY ANY DIRECT OR INDIRECT DAMAGES OR EXPENSES
-INCLUDING BUT NOT LIMITED TO ANY INCIDENTAL, SPECIAL, INDIRECT, PUNITIVE OR
-CONSEQUENTIAL DAMAGES, LOST PROFITS OR LOST DATA, COST OF PROCUREMENT OF
-SUBSTITUTE GOODS, TECHNOLOGY, SERVICES, OR ANY CLAIMS BY THIRD PARTIES
-(INCLUDING BUT NOT LIMITED TO ANY DEFENSE THEREOF), OR OTHER SIMILAR COSTS.
- *******************************************************************************/
-// DOM-IGNORE-END
-
-
 // *****************************************************************************
 // *****************************************************************************
 // Section: Included Files 
@@ -55,6 +29,8 @@ SUBSTITUTE GOODS, TECHNOLOGY, SERVICES, OR ANY CLAIMS BY THIRD PARTIES
 // *****************************************************************************
 
 #include "app.h"
+#include "system/ports/sys_ports.h"
+#include "peripheral/ports/plib_ports.h"
 
 // *****************************************************************************
 // *****************************************************************************
@@ -91,6 +67,10 @@ static uint8_t readString[1];
 // Section: Application Callback Functions
 // *****************************************************************************
 // *****************************************************************************
+void APP_Tmr_Sys_Service_Callback_Delay1( uintptr_t context, uint32_t currTick)
+{
+    appData.delay1Expired = true;
+}
 
 
 /*******************************************************
@@ -259,6 +239,13 @@ void APP_USBDeviceEventHandler ( USB_DEVICE_EVENT event, void * eventData, uintp
 // *****************************************************************************
 // *****************************************************************************
 
+static void Update_LED (void)
+{
+    //----------   PIN of LED to be updated here ----------//
+    PLIB_PORTS_PinWrite (PORTS_ID_0, PORT_CHANNEL_B, PORTS_BIT_POS_3, appData.ledvalue);
+    PLIB_PORTS_PinWrite (PORTS_ID_0, PORT_CHANNEL_B, PORTS_BIT_POS_14, appData.ledvalue);
+}
+
 /******************************************************************************
   Function:
     static void USB_TX_Task (void)
@@ -368,6 +355,16 @@ void APP_Initialize ( void )
     /* TODO: Initialize your application's state machine and other
      * parameters.
      */
+    appData.delay1Expired = false;
+    appData.ledvalue = true;
+    
+        //----------   PIN 7 of LED to be config here ----------//
+    PLIB_PORTS_PinModeSelect (PORTS_ID_0, PORTS_ANALOG_PIN_5, PORTS_PIN_MODE_DIGITAL);
+    PLIB_PORTS_PinDirectionOutputSet(PORTS_ID_0, PORT_CHANNEL_B, PORTS_BIT_POS_3);
+    
+    // Setup pin 25 as output for "Chip Select"
+    PLIB_PORTS_PinModeSelect (PORTS_ID_0, PORTS_ANALOG_PIN_10, PORTS_PIN_MODE_DIGITAL);
+    PLIB_PORTS_PinDirectionOutputSet(PORTS_ID_0, PORT_CHANNEL_B, PORTS_BIT_POS_14);
 }
 
 
@@ -407,6 +404,9 @@ void APP_Tasks ( void )
                                            APP_USBDeviceEventHandler, 0);
             
                 appData.state = APP_STATE_SERVICE_TASKS;
+                appData.sysTmrHandle1 = SYS_TMR_CallbackPeriodic(500, 0, &APP_Tmr_Sys_Service_Callback_Delay1);// Delay in milli sec
+                PLIB_PORTS_PinWrite (PORTS_ID_0, PORT_CHANNEL_B, PORTS_BIT_POS_14, 0); // Assert CS initial
+
             }
             break;
         }
@@ -415,6 +415,12 @@ void APP_Tasks ( void )
         {
             USB_RX_Task();
             USB_TX_Task();
+            if(appData.delay1Expired == true)
+               {
+                    appData.ledvalue = !appData.ledvalue; //toggle the LED
+                    Update_LED();
+                    appData.delay1Expired = false;
+                }
         
             break;
         }
