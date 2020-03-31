@@ -91,7 +91,7 @@ SUBSTITUTE GOODS, TECHNOLOGY, SERVICES, OR ANY CLAIMS BY THIRD PARTIES
 #pragma config USERID =     0xffff
 #pragma config PMDL1WAY =   OFF
 #pragma config IOL1WAY =    OFF
-#pragma config FUSBIDIO =   OFF
+#pragma config FUSBIDIO =   ON
 #pragma config FVBUSONIO =  OFF
 // </editor-fold>
 

@@ -1,5 +1,6 @@
 /*******************************************************************************
-  MPLAB Harmony Application Source File
+ USB_ON
+ * MPLAB Harmony Application Source File
   
   Company:
     Microchip Technology Inc.
