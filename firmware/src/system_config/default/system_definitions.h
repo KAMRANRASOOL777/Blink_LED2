@@ -54,7 +54,10 @@ SUBSTITUTE GOODS, TECHNOLOGY, SERVICES, OR ANY CLAIMS BY THIRD PARTIES
 #include "system/int/sys_int.h"
 #include "system/tmr/sys_tmr.h"
 #include "driver/tmr/drv_tmr.h"
-#include "led_on.h"
+#include "driver/usb/usbfs/drv_usbfs.h"
+#include "usb/usb_device.h"
+#include "usb/usb_device_cdc.h"
+#include "app.h"
 
 
 // DOM-IGNORE-BEGIN
@@ -91,6 +94,11 @@ typedef struct
     SYS_MODULE_OBJ  sysTmr;
     SYS_MODULE_OBJ  drvTmr0;
 
+    SYS_MODULE_OBJ  drvUSBObject;
+    
+    SYS_MODULE_OBJ  usbDevObject0;
+
+
 
 } SYSTEM_OBJECTS;
 
@@ -101,6 +109,7 @@ typedef struct
 // *****************************************************************************
 
 extern SYSTEM_OBJECTS sysObj;
+
 
 //DOM-IGNORE-BEGIN
 #ifdef __cplusplus

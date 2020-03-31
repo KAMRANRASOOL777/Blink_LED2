@@ -21,7 +21,7 @@
             <itemPath>../src/system_config/default/system_definitions.h</itemPath>
           </logicalFolder>
         </logicalFolder>
-        <itemPath>../src/led_on.h</itemPath>
+        <itemPath>../src/app.h</itemPath>
       </logicalFolder>
       <logicalFolder name="f1" displayName="framework" projectFiles="true">
         <logicalFolder name="f1" displayName="driver" projectFiles="true">
@@ -34,6 +34,20 @@
             <itemPath>../../../../framework/driver/tmr/drv_tmr_mapping.h</itemPath>
             <itemPath>../../../../framework/driver/tmr/drv_tmr_compatibility.h</itemPath>
             <itemPath>../../../../framework/driver/tmr/tmr_definitions_pic32m.h</itemPath>
+          </logicalFolder>
+          <logicalFolder name="f2" displayName="usb" projectFiles="true">
+            <logicalFolder name="f2" displayName="usbfs" projectFiles="true">
+              <logicalFolder name="f1" displayName="src" projectFiles="true">
+                <itemPath>../../../../framework/driver/usb/usbfs/src/drv_usbfs_local.h</itemPath>
+                <itemPath>../../../../framework/driver/usb/usbfs/src/drv_usbfs_variant_mapping.h</itemPath>
+              </logicalFolder>
+              <itemPath>../../../../framework/driver/usb/usbfs/drv_usbfs.h</itemPath>
+              <itemPath>../../../../framework/driver/usb/usbfs/drv_usbfs_mapping.h</itemPath>
+            </logicalFolder>
+            <logicalFolder name="f1" displayName="usbhs" projectFiles="true">
+              <itemPath>../../../../framework/driver/usb/usbhs/drv_usbhs.h</itemPath>
+            </logicalFolder>
+            <itemPath>../../../../framework/driver/usb/drv_usb.h</itemPath>
           </logicalFolder>
           <itemPath>../../../../framework/driver/driver.h</itemPath>
           <itemPath>../../../../framework/driver/driver_common.h</itemPath>
@@ -73,6 +87,25 @@
           </logicalFolder>
           <itemPath>../../../../framework/system/system.h</itemPath>
         </logicalFolder>
+        <logicalFolder name="f4" displayName="usb" projectFiles="true">
+          <logicalFolder name="f1" displayName="src" projectFiles="true">
+            <itemPath>../../../../framework/usb/src/usb_device_function_driver.h</itemPath>
+            <itemPath>../../../../framework/usb/src/usb_device_local.h</itemPath>
+            <itemPath>../../../../framework/usb/src/usb_device_mapping.h</itemPath>
+            <itemPath>../../../../framework/usb/src/usb_device_cdc_local.h</itemPath>
+          </logicalFolder>
+          <itemPath>../../../../framework/usb/usb_common.h</itemPath>
+          <itemPath>../../../../framework/usb/usb_chapter_9.h</itemPath>
+          <itemPath>../../../../framework/usb/usb_hub.h</itemPath>
+          <itemPath>../../../../framework/usb/usb_host_hub.h</itemPath>
+          <itemPath>../../../../framework/usb/usb_host_client_driver.h</itemPath>
+          <itemPath>../../../../framework/usb/usb_host.h</itemPath>
+          <itemPath>../../../../framework/usb/usb_host_hub_interface.h</itemPath>
+          <itemPath>../../../../framework/usb/usb_device.h</itemPath>
+          <itemPath>../../../../framework/usb/usb_billboard.h</itemPath>
+          <itemPath>../../../../framework/usb/usb_cdc.h</itemPath>
+          <itemPath>../../../../framework/usb/usb_device_cdc.h</itemPath>
+        </logicalFolder>
       </logicalFolder>
     </logicalFolder>
     <logicalFolder name="LinkerScript"
@@ -106,7 +139,7 @@
             <itemPath>../src/system_config/default/system_tasks.c</itemPath>
           </logicalFolder>
         </logicalFolder>
-        <itemPath>../src/led_on.c</itemPath>
+        <itemPath>../src/app.c</itemPath>
         <itemPath>../src/main.c</itemPath>
       </logicalFolder>
       <logicalFolder name="f1" displayName="framework" projectFiles="true">
@@ -115,6 +148,16 @@
             <logicalFolder name="f1" displayName="src" projectFiles="true">
               <logicalFolder name="f1" displayName="dynamic" projectFiles="true">
                 <itemPath>../../../../framework/driver/tmr/src/dynamic/drv_tmr.c</itemPath>
+              </logicalFolder>
+            </logicalFolder>
+          </logicalFolder>
+          <logicalFolder name="f2" displayName="usb" projectFiles="true">
+            <logicalFolder name="f1" displayName="usbfs" projectFiles="true">
+              <logicalFolder name="f1" displayName="src" projectFiles="true">
+                <logicalFolder name="f1" displayName="dynamic" projectFiles="true">
+                  <itemPath>../../../../framework/driver/usb/usbfs/src/dynamic/drv_usbfs.c</itemPath>
+                  <itemPath>../../../../framework/driver/usb/usbfs/src/dynamic/drv_usbfs_device.c</itemPath>
+                </logicalFolder>
               </logicalFolder>
             </logicalFolder>
           </logicalFolder>
@@ -128,6 +171,15 @@
           <logicalFolder name="f2" displayName="tmr" projectFiles="true">
             <logicalFolder name="f1" displayName="src" projectFiles="true">
               <itemPath>../../../../framework/system/tmr/src/sys_tmr.c</itemPath>
+            </logicalFolder>
+          </logicalFolder>
+        </logicalFolder>
+        <logicalFolder name="f3" displayName="usb" projectFiles="true">
+          <logicalFolder name="f1" displayName="src" projectFiles="true">
+            <logicalFolder name="f1" displayName="dynamic" projectFiles="true">
+              <itemPath>../../../../framework/usb/src/dynamic/usb_device.c</itemPath>
+              <itemPath>../../../../framework/usb/src/dynamic/usb_device_cdc.c</itemPath>
+              <itemPath>../../../../framework/usb/src/dynamic/usb_device_cdc_acm.c</itemPath>
             </logicalFolder>
           </logicalFolder>
         </logicalFolder>
@@ -257,7 +309,7 @@
         <property key="generate-16-bit-code" value="false"/>
         <property key="generate-cross-reference-file" value="false"/>
         <property key="generate-micro-compressed-code" value="false"/>
-        <property key="heap-size" value="0"/>
+        <property key="heap-size" value="512"/>
         <property key="input-libraries" value=""/>
         <property key="kseg-length" value=""/>
         <property key="kseg-origin" value=""/>

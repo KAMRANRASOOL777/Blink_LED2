@@ -1,5 +1,6 @@
-build/default/production/_ext/1688732426/system_init.o:  \
- ../src/system_config/default/system_init.c  \
+build/default/production/_ext/1360937237/app.o:  \
+../src/app.c  \
+../src/app.h  \
  ../src/system_config/default/system_config.h  \
  ../src/system_config/default/system_definitions.h  \
  ../../../../framework/system/common/sys_common.h  \
@@ -7,7 +8,6 @@ build/default/production/_ext/1688732426/system_init.o:  \
  ../../../../framework/system/devcon/sys_devcon.h  \
  ../../../../framework/system/system.h  \
  ../../../../framework/system/clk/sys_clk.h  \
- ../src/system_config/default/system_config.h  \
  ../../../../framework/peripheral/osc/plib_osc.h  \
  ../../../../framework/peripheral/osc/processor/osc_processor.h  \
  ../../../../framework/peripheral/osc/processor/osc_p32xxxx.h  \
@@ -185,5 +185,4 @@ build/default/production/_ext/1688732426/system_init.o:  \
  ../../../../framework/usb/usb_device_cdc.h  \
  ../../../../framework/usb/src/usb_device_function_driver.h  \
  ../../../../framework/usb/usb_cdc.h  \
-../src/app.h  \
- ../src/system_config/default/system_definitions.h 
+../src/app.h 

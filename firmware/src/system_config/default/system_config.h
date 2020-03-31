@@ -83,7 +83,7 @@ extern "C" {
 */
 #define SYS_CLK_FREQ                        40000000ul
 #define SYS_CLK_BUS_PERIPHERAL_1            5000000ul
-#define SYS_CLK_BUS_REFERENCE_1             110001ul
+#define SYS_CLK_BUS_REFERENCE_1             2000000ul
 #define SYS_CLK_UPLL_BEFORE_DIV2_FREQ       96000000ul
 #define SYS_CLK_CONFIG_PRIMARY_XTAL         8000000ul
 #define SYS_CLK_CONFIG_SECONDARY_XTAL       32768ul
@@ -93,7 +93,7 @@ extern "C" {
 /*** Timer System Service Configuration ***/
 #define SYS_TMR_POWER_STATE             SYS_MODULE_POWER_RUN_FULL
 #define SYS_TMR_DRIVER_INDEX            DRV_TMR_INDEX_0
-#define SYS_TMR_MAX_CLIENT_OBJECTS      1
+#define SYS_TMR_MAX_CLIENT_OBJECTS      5
 #define SYS_TMR_FREQUENCY               1000
 #define SYS_TMR_FREQUENCY_TOLERANCE     10
 #define SYS_TMR_UNIT_RESOLUTION         10000
@@ -131,6 +131,76 @@ extern "C" {
 // *****************************************************************************
 // *****************************************************************************
 
+/*** USB Driver Configuration ***/
+
+
+/* Enables Device Support */
+#define DRV_USBFS_DEVICE_SUPPORT      true
+
+/* Disable Host Support */
+#define DRV_USBFS_HOST_SUPPORT      false
+
+/* Maximum USB driver instances */
+#define DRV_USBFS_INSTANCES_NUMBER    1
+
+/* Interrupt mode enabled */
+#define DRV_USBFS_INTERRUPT_MODE      true
+
+
+/* Number of Endpoints used */
+#define DRV_USBFS_ENDPOINTS_NUMBER    3
+
+
+
+
+/*** USB Device Stack Configuration ***/
+
+
+
+
+
+
+
+
+
+
+/* The USB Device Layer will not initialize the USB Driver */
+#define USB_DEVICE_DRIVER_INITIALIZE_EXPLICIT
+
+/* Maximum device layer instances */
+#define USB_DEVICE_INSTANCES_NUMBER     1
+
+/* EP0 size in bytes */
+#define USB_DEVICE_EP0_BUFFER_SIZE      64
+
+
+
+
+
+
+
+
+
+
+/* Maximum instances of CDC function driver */
+#define USB_DEVICE_CDC_INSTANCES_NUMBER     1
+
+
+
+
+
+
+
+
+
+
+/* CDC Transfer Queue Size for both read and
+   write. Applicable to all instances of the
+   function driver */
+#define USB_DEVICE_CDC_QUEUE_DEPTH_COMBINED 3
+
+
+
 
 
 // *****************************************************************************
@@ -142,6 +212,9 @@ extern "C" {
 
 
 /*** Application Instance 0 Configuration ***/
+
+#define APP_USB_CDC_COM_PORT_SINGLE_READ_BUFFER_SIZE  512
+#define APP_USB_CDC_COM_PORT_SINGLE_WRITE_BUFFER_SIZE 512
 
 //DOM-IGNORE-BEGIN
 #ifdef __cplusplus
